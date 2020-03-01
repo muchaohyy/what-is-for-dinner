@@ -1,6 +1,8 @@
 import pandas as pd
 import json
 
+# Preprocess fridge information
+# In: (str, date) -> Out: dataframe
 def preprocess_fridge(fridge_file, current_date):
     # Load myFridge with column types
     try:
@@ -11,16 +13,19 @@ def preprocess_fridge(fridge_file, current_date):
         exit(1)
     df_myFridge['use-by-date'] =  pd.to_datetime(df_myFridge['use-by-date'], format='%d/%m/%Y')
 
-    # An ingredient that is past its use-by date should not be used for cooking.
+    # An ingredient that is past its use-by-date should not be used for cooking
     df_myFridge = df_myFridge[df_myFridge['use-by-date'] >= current_date]
 
-    # For same item with diffent use-by-date, sum the quantity and get the smallest use-by-date
+    # For same items with diffent use-by-date, sum the quantities and get the smallest use-by-date
     df_myFridge = df_myFridge.groupby(['item', 'unit-of-measure']).agg({'quantity':sum, 'use-by-date': min}).reset_index()
     
     return df_myFridge
 
+# Get recommendation for dinner
+# In: (str, str, date) -> Out: str
 def what_is_for_dinner(fridge_file, recipe_file, current_date):
-    # Load fridge stock
+    # Preprocess fridge information
+    # In: (str, date) -> Out: dataframe
     df_myFridge = preprocess_fridge(fridge_file, current_date)
     # Load myRecipes
     with open(recipe_file) as recipe_json:
@@ -71,7 +76,7 @@ def what_is_for_dinner(fridge_file, recipe_file, current_date):
         return food_list[0]['name']
         
     # More than one recipe found
-    # Get the closest date to pick the food.
+    # Get the closest use-by-date to pick the food.
     # If dates are same, randomly pick one
     else:
         df_food = pd.DataFrame(food_list)

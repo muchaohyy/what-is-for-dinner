@@ -31,8 +31,8 @@ make find_dinner
 # 3. Take input as json event and return the result in json
 # 4. Use API gateway to expose the lambda as API
 # 5. Use S3 to host fridge information
-# 6. Involve data process, if file of fridge information needs to be processed, such as data cleansing, validation, transformation, etc.
-# 7. Think about saving file of fridge information in parquet format rather than csv, which will bring less space cost, faster query time, column-oriented design and metadata layer.
+# 6. Involve data process, if file of fridge information needs to be pre-processed, such as data cleansing, validation, transformation, etc.
+# 7. Think about saving file of fridge information in parquet format rather than csv, which will bring less  cost, faster query time, column-oriented design and metadata layer.
 # 8. Use Athena to build external table on top of file in s3 to SQL query if data auditing is needed.
 # 9. Serverless framework can be used as development frame to work with version control and CICD if it is neccessary.
 # 10. More design improvement can be discussed in further interview.

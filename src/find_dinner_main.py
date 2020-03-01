@@ -16,5 +16,7 @@ if not os.path.isfile(myRecipes):
     print('Recipe file cannot be found')
     exit(1)
 
+# Get recommendation for dinner
+# In: (str, str, date) -> Out: str
 result = fh.what_is_for_dinner(myFridge, myRecipes, fg.today)
 print(result)
