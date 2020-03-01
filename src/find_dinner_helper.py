@@ -3,8 +3,12 @@ import json
 
 def preprocess_fridge(fridge_file, current_date):
     # Load myFridge with column types
-    df_myFridge = pd.read_csv(fridge_file, sep=',',
-                            dtype={'item': str,'quantity': int, 'unit-of-measure': str,'use-by-date': str})
+    try:
+        df_myFridge = pd.read_csv(fridge_file, sep=',',
+                                dtype={'item': str,'quantity': int, 'unit-of-measure': str,'use-by-date': str})
+    except:
+        print("Fridge Storage file cannot be coverted into dataframe, please check the source data")
+        exit(1)
     df_myFridge['use-by-date'] =  pd.to_datetime(df_myFridge['use-by-date'], format='%d/%m/%Y')
 
     # An ingredient that is past its use-by date should not be used for cooking.
@@ -60,15 +64,15 @@ def what_is_for_dinner(fridge_file, recipe_file, current_date):
 
     # No recipe found
     if len(food_list) == 0:
-        print('Call for takeout')
+        return 'Call for takeout'
         
     # One recipe
     elif len(food_list) == 1:
-        print(food_list[0]['name'])
+        return food_list[0]['name']
         
     # More than one recipe found
     # Get the closest date to pick the food.
     # If dates are same, randomly pick one
     else:
         df_food = pd.DataFrame(food_list)
-        print(df_food.sort_values(by ='date').iloc[0]['name'])
+        return df_food.sort_values(by ='date').iloc[0]['name']

@@ -16,8 +16,5 @@ if not os.path.isfile(myRecipes):
     print('Recipe file cannot be found')
     exit(1)
 
-# Testing
-# myFridge = '../input/my-fridge.csv'
-# myRecipes = '../input/my-recipes.json'
-
-fh.what_is_for_dinner(myFridge, myRecipes, fg.today)
+result = fh.what_is_for_dinner(myFridge, myRecipes, fg.today)
+print(result)
