@@ -2,15 +2,16 @@ import os
 import find_dinner_helper as fh
 import find_dinner_global as fg
 
+# Initialize global variables
 fg.init()
 
-# Get location of Fridge Storage File
+# Get the location of fridge storage file
 myFridge = input('Fridge Storage File: ')
 if not os.path.isfile(myFridge):
     print('Fridge Storage file cannot be found')
     exit(1)
 
-# Get location of Recipe File
+# Get the location of recipe file
 myRecipes = input('Recipe File: ')
 if not os.path.isfile(myRecipes):
     print('Recipe file cannot be found')

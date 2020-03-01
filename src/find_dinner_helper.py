@@ -4,7 +4,7 @@ import json
 # Preprocess fridge information
 # In: (str, date) -> Out: dataframe
 def preprocess_fridge(fridge_file, current_date):
-    # Load myFridge with column types
+    # Load fridge_file with column types
     try:
         df_myFridge = pd.read_csv(fridge_file, sep=',',
                                 dtype={'item': str,'quantity': int, 'unit-of-measure': str,'use-by-date': str})
@@ -27,7 +27,7 @@ def what_is_for_dinner(fridge_file, recipe_file, current_date):
     # Preprocess fridge information
     # In: (str, date) -> Out: dataframe
     df_myFridge = preprocess_fridge(fridge_file, current_date)
-    # Load myRecipes
+    # Load recipe_file
     with open(recipe_file) as recipe_json:
         recipes = json.load(recipe_json)
 
@@ -67,15 +67,15 @@ def what_is_for_dinner(fridge_file, recipe_file, current_date):
         }
         food_list.append(food_dict)
 
-    # No recipe found
+    # No recipe is found
     if len(food_list) == 0:
         return 'Call for takeout'
         
-    # One recipe
+    # Only one recipe is founded
     elif len(food_list) == 1:
         return food_list[0]['name']
         
-    # More than one recipe found
+    # More than one recipes are found
     # Get the closest use-by-date to pick the food.
     # If dates are same, randomly pick one
     else:

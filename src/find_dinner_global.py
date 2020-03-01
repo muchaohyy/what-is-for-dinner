@@ -3,7 +3,7 @@ from pytz import timezone
 
 # Initialize global variables
 def init():
-    # Setup timezone as Sydney's time
+    # Setup timezone as Sydney's timezone
     global tz_sydney
     tz_sydney = timezone('Australia/Sydney')
     
