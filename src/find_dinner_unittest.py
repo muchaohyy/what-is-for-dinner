@@ -72,7 +72,7 @@ class TestFindDinner(unittest.TestCase):
         self.assertEqual(result,output)
 
     # Testing case 5
-    # the recipe with the closest use-by-date will be returned if multiple recipes are matched
+    # The recipe with the closest use-by-date will be returned if multiple recipes are matched
     def test_multiple_recipes(self):
         # Given
         myFridge = './input/my-fridge-5.csv'
